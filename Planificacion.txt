@@ -1,0 +1,31 @@
+Planificación inicial del sprint:
+ 1) Puesta en marcha del proyecto y Arquitectura base
+	- Implementar la arquitectura base: servidor (modelo - REST) - 
+									 cliente (cliente REST - interfaz GUI)
+									 --> Prototipo inicial
+	-Desplegar prototipo inicial
+	
+ 2) Implementar el juego
+	- Mientras quede funcionalidad:
+		- Elegir funcionalidad - diseñar - implementar - probar - desplegar
+		
+ 3) Capa de acceso a datos
+		- Agregar persistencia
+		
+ 4) Agregar funcionalidad (...)
+ 
+ -------
+ 
+ - Diseñar - implementar el modelo (toda la funcionalidad)
+ - Integrar el modelo en la arquitectura SaaS: REST - cliente
+ - Persistencia
+ - Otros
+ 
+ -------
+ 
+ - Interfaz GUI -> Servidor -> BBDD
+ 
+ - BBDD -> Interfaz GUI / REST
+ 
+ -------
+ 
