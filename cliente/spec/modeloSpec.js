@@ -19,3 +19,5 @@ describe("El juego...", function() {
 	expect(lista.length).toEqual(1);
   });
 });
+
+//Añadir más tests

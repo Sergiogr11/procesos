@@ -1,0 +1,22 @@
+{
+  "name": "procesos",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sergiogr11/procesos.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Sergiogr11/procesos/issues"
+  },
+  "homepage": "https://github.com/Sergiogr11/procesos#readme",
+  "dependencies": {
+    "express": "^4.18.1"
+  }
+}
