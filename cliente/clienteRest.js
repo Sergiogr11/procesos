@@ -8,6 +8,7 @@ function ClienteRest(){
             if (data.nick!=-1){
                 console.log("Usuario " + data.nick + " registrado");
                 cli.nick = data.nick;
+                iu.mostrarHome(data.nick);
                 //ws.nick=data.nick;
                 //$.cookie("nick",ws.nick);
                 //iu.mostrarHome(data);
@@ -51,12 +52,12 @@ function ClienteRest(){
                 
                 //ws.nick=data.nick;
                 //$.cookie("nick",ws.nick);
-                //iu.mostrarHome(data);
+                iu.mostrarHome();
             }
             else{
                 console.log("No se ha podido unir a la partida");
                 //iu.mostrarModal("El nick ya está en uso");
-                //iu.mostrarAgregarJugador();
+                //iu.mostrarAgregarUsuario();
             }
         });
     }
