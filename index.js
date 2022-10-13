@@ -1,5 +1,3 @@
-// [START gae_flex_quickstart]
-
 const fs = require("fs");
 const express = require('express');
 const app = express();
@@ -14,13 +12,14 @@ app.use(express.static(__dirname + "/"));
 app.get("/", function(request,response){
   var contenido=fs.readFileSync(__dirname+"/cliente/index.html");
   response.setHeader("Content-type","text/html");
+
   response.send(contenido);
 });
 
 app.get('/agregarUsuario/:nick', function(request, response){
   let nick = request.params.nick;
-  let res;
-  res=juego.agregarUsuario(nick);
+  let res = juego.agregarUsuario(nick);
+
   response.send(res);
 });
 
@@ -40,14 +39,14 @@ app.get('/unirseAPartida/:nick/:codigo', function(request, response){
 });
 
 app.get('/obtenerPartidas', function(request, response){
-  let res = juego.obtenerPartidas();
-  response.send(res)
-  
+  let lista = juego.obtenerPartidas();
+
+  response.send(lista)
 });
 
 app.get('/obtenerPartidasDisponibles', function(request, response){
-  let res = juego.obtenerPartidasDisponibles();
-  response.send(res)
+  let lista = juego.obtenerPartidasDisponibles();
+  response.send(lista)
   
 });
 

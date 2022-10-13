@@ -11,6 +11,10 @@ function Juego(){
 		}
 		return res
 	}
+
+	this.eliminarUsuario=function(nick){
+		delete this.usuarios[nick];
+	}
 	
 	this.crearPartida=function(usr){
 		//obtener código único
@@ -24,12 +28,11 @@ function Juego(){
 
 	this.jugadorCreaPartida=function(nick){
 		let usr = this.usuarios[nick]; //juego.obtenerUsuario(nick); CREAR METODO EN modelo.js
-		  let res={codigo:-1};
-		  let codigo;
-		  if(usr){
-			codigo=usr.crearPartida();
+		let res={codigo:-1};
+		if(usr){
+			let codigo=usr.crearPartida();
 			res={codigo:codigo};
-		  }
+		}
 		return res;
 	}
 	
@@ -46,7 +49,8 @@ function Juego(){
 		let usr = this.usuarios[nick];
 		let res={"codigo":-1}
 		if(usr){
-			let valor=this.unirseAPartida(codigo,usr);
+			//let valor=this.unirseAPartida(codigo,usr)
+			let valor=usr.unirseAPartida(codigo);
 			res={"codigo":valor};
 		}
 		return res;
@@ -59,6 +63,7 @@ function Juego(){
 		}
 		return lista;
 	}
+
 	this.obtenerPartidasDisponibles=function(){
 		//devolver solo las partidas sin completar
 		let lista = [];
@@ -74,11 +79,13 @@ function Juego(){
 function Usuario(nick,juego){
 	this.nick=nick;
 	this.juego=juego;
+
 	this.crearPartida=function(){
 		return this.juego.crearPartida(this);
 	}
+
 	this.unirseAPartida=function(codigo){
-		this.juego.unirseAPartida(codigo, this);
+		return this.juego.unirseAPartida(codigo, this);
 	}
 }
 
@@ -88,17 +95,20 @@ function Partida(codigo, usr){
 	this.jugadores = []; //array normal o asociativo
 	this.maxJugadores = 2;
 	this.fase="inicial"; //new Inicial()
+
 	this.agregarJugador = function(usr){
 		let res=this.codigo;
-		if(this.jugadores.length<2){
+		if(this.hayHueco()){
 			this.jugadores.push(usr);
-			console.log("El usuario " + usr.nick + " se ha unido a la partida de codigo " + codigo);
+			console.log("El usuario " + usr.nick + " se ha unido a la partida de codigo " + this.codigo);
+			this.comprobarFase();
 		}else{
 			res=-1
 			console.log("La partida esta completa");
 		}
 		return res;
 	}
+
 	this.hayHueco=function(){
 		return (this.jugadores.length<this.maxJugadores);
 	}
