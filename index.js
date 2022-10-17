@@ -3,7 +3,7 @@ const express = require('express');
 const app = express();
 const modelo = require("./servidor/modelo.js");
 
-const PORT = process.eventNames.PORT || 3000;
+const PORT = process.env.PORT || 3000;
 
 let juego = new modelo.Juego();
 
