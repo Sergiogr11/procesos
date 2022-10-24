@@ -1,10 +1,14 @@
 # Proyecto 22
 Proyecto de la asignatura procesos en ingeniería software 22-23.
-Escuela Superior de Ingeniería Informática
+Escuela Superior de Ingeniería Informática - Albacete (Universidad de Castilla La Mancha)
 
-#Descripción
+## Descripción
 Este repositorio contiene la arquitectura base de una solución software estilo SaaS (Software as a Service) de una aplicación genérica que implementa la siguiente funcionalidad:
 
+- Los usuarios inician sesión con un nick (no hay clave). El nick es único.
+- Los usuarios pueden crear partida (sin nombre). Las partidas son de 2 usuarios. El sistema asigna un código a la partida
+- Los usuarios pueden unirse a partidas disponibles (las que tienen un sólo jugador)
 
-
+## URL
+https://procesos-ij2yuy7u7a-ew.a.run.app
 
