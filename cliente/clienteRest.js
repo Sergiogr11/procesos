@@ -9,13 +9,12 @@ function ClienteRest(){
 				console.log("Usuario "+data.nick+" registrado")
 				cli.nick=data.nick;
 				//ws.nick=data.nick;
-				//$.cookie("nick",ws.nick);
-				cli.obtenerListaPartidasDisponibles();
+				$.cookie("nick",data.nick);
 				iu.mostrarHome();//iu.mostrarHome(data.nick)
 			}
 			else{
 				console.log("No se ha podido registrar el usuario")
-				//iu.mostrarModal("El nick ya está en uso");
+				iu.mostrarModal("El nick ya está en uso");
 				iu.mostrarAgregarUsuario();
 			}
 		});
@@ -45,8 +44,8 @@ function ClienteRest(){
 			//se ejecuta cuando conteste el servidor
 			//console.log(data);
 			if (data.codigo!=-1){
-				console.log("Usuario "+cli.nick+" se une a partida codigo: "+codigo);
-				iu.mostrarCodigo(codigo);
+				console.log("Usuario "+cli.nick+" se une a partida codigo: "+data.codigo);
+				iu.mostrarCodigo(data.codigo);
 				//ws.nick=data.nick;
 				//$.cookie("nick",ws.nick);
 				//iu.mostrarHome(data);
@@ -68,7 +67,6 @@ function ClienteRest(){
 	}
 	this.obtenerListaPartidasDisponibles=function(){
 		let cli=this;
-		//obtenerPartidasDisponibles
 		$.getJSON("/obtenerPartidasDisponibles",function(lista){
 			console.log(lista);
 			iu.mostrarListaDePartidasDisponibles(lista);
