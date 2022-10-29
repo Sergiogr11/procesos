@@ -1,124 +1,139 @@
 function Juego(){
-    this.partidas=[];
+	this.partidas={};
 	this.usuarios={}; //array asociativo
 
-    this.agregarUsuario=function(nick){
-		let res={nick:-1};
-		if(!this.usuarios[nick]){
+	this.agregarUsuario=function(nick){
+		let res={"nick":-1};
+		if (!this.usuarios[nick]){
 			this.usuarios[nick]=new Usuario(nick,this);
-			res={nick:nick};
-			console.log("Nuevo usuario " + nick);
+			res={"nick":nick};
+			console.log("Nuevo usuario: "+nick);
 		}
-		return res
+		return res;
 	}
-
 	this.eliminarUsuario=function(nick){
 		delete this.usuarios[nick];
 	}
-	
+	this.usuarioSale=function(nick){
+		if (this.usuarios[nick]){
+			this.eliminarUsuario(nick);
+			this.finalizarPartida(nick);
+		}
+	}
+	this.jugadorCreaPartida=function(nick){
+		let usr = this.usuarios[nick];
+		let res={codigo:-1};
+  		if (usr){
+    		let codigo=usr.crearPartida();
+	    	//let codigo=this.crearPartida(usr);
+	    	res={codigo:codigo};
+	    }
+    	return res;
+	}
+	this.jugadorSeUneAPartida=function(nick,codigo){
+		let usr = this.usuarios[nick];
+		let res={"codigo":-1};
+  		if (usr){
+    		let valor=usr.unirseAPartida(codigo);
+    		//let valor=this.unirseAPartida(codigo,usr)
+	    	res={"codigo":valor};
+	    }
+    	return res;
+	}
 	this.crearPartida=function(usr){
-		//obtener código único
-		//crear partida con propietario nick
-		//devolver código/partida
-		let codigo = Date.now();
-		console.log("Usuario " + usr.nick + " crea Partida y se une");
-		this.partidas[codigo] = new Partida(codigo, usr);
+		let codigo=Date.now();
+		console.log("Usuario "+usr.nick+ " crea partida "+codigo);
+		this.partidas[codigo]=new Partida(codigo,usr); 
 		return codigo;
 	}
 
-	this.jugadorCreaPartida=function(nick){
-		let usr = this.usuarios[nick]; //juego.obtenerUsuario(nick); CREAR METODO EN modelo.js
-		let res={codigo:-1};
-		if(usr){
-			let codigo=usr.crearPartida();
-			res={codigo:codigo};
-		}
-		return res;
-	}
-	
+	//TAREA SPRINT 2
+	//Tras unirse a partida si es el último mostrar: 'A jugar!'
 	this.unirseAPartida=function(codigo,usr){
 		let res=-1;
-		if(this.partidas[codigo]){
-			res = this.partidas[codigo].agregarJugador(usr);
-		}else{
-			console.log("La partida no existe");
+		if (this.partidas[codigo]){
+			res=this.partidas[codigo].agregarJugador(usr);
 		}
-	}
-
-	this.jugadorseUneAPartida=function(nick,codigo){
-		let usr = this.usuarios[nick];
-		let res={"codigo":-1}
-		if(usr){
-			//let valor=this.unirseAPartida(codigo,usr)
-			let valor=usr.unirseAPartida(codigo);
-			res={"codigo":valor};
+		else{
+			console.log("La partida no existe");
 		}
 		return res;
 	}
-	
 	this.obtenerPartidas=function(){
-		let lista = []; 
-		for(let key in this.partidas){
+		let lista=[];
+		for (let key in this.partidas){
 			lista.push({"codigo":key,"owner":this.partidas[key].owner.nick});
 		}
 		return lista;
 	}
-
 	this.obtenerPartidasDisponibles=function(){
-		//devolver solo las partidas sin completar
-		let lista = [];
-		for (let key in this.partidas) {
-			if (this.partidas[key].jugadores.length < 2) {
-				lista.push({ "codigo": key, "owner": this.partidas[key].owner.nick});
+		let lista=[];
+		for (let key in this.partidas){
+			if (this.partidas[key].fase=="inicial"){
+				lista.push({"codigo":key,"owner":this.partidas[key].owner.nick});
 			}
 		}
 		return lista;
+	}
+	this.finalizarPartida=function(nick){
+		for (let key in this.partidas){
+			if (this.partidas[key].fase=="inicial" && this.partidas[key].estoy(nick)){
+				this.partidas[key].fase="final";
+			}
+		}
+	}
+	//TAREA SPRINT 2
+	//Incluir opcion de abandonar partida -> Redireccion a 'home'
+	this.abandonarPartida=function(codigo,usr){
 	}
 }
 
 function Usuario(nick,juego){
 	this.nick=nick;
 	this.juego=juego;
-
 	this.crearPartida=function(){
-		return this.juego.crearPartida(this);
+		return this.juego.crearPartida(this)
 	}
-
 	this.unirseAPartida=function(codigo){
-		return this.juego.unirseAPartida(codigo, this);
+		return this.juego.unirseAPartida(codigo,this);
 	}
 }
 
-function Partida(codigo, usr){
-    this.codigo = codigo;
-	this.owner = usr;
-	this.jugadores = []; //array normal o asociativo
-	this.maxJugadores = 2;
+function Partida(codigo,usr){
+	this.codigo=codigo;
+	this.owner=usr;
+	this.jugadores=[];
 	this.fase="inicial"; //new Inicial()
-
-	this.agregarJugador = function(usr){
+	this.maxJugadores=2;
+	this.agregarJugador=function(usr){
 		let res=this.codigo;
-		if(this.hayHueco()){
+		if (this.hayHueco()){
 			this.jugadores.push(usr);
-			console.log("El usuario " + usr.nick + " se ha unido a la partida de codigo " + this.codigo);
+			console.log("El usuario "+usr.nick+" se une a la partida "+this.codigo);
 			this.comprobarFase();
-		}else{
-			res=-1
-			console.log("La partida esta completa");
+		}
+		else{
+			res=-1;
+			console.log("La partida está completa")
 		}
 		return res;
 	}
-
-	this.hayHueco=function(){
-		return (this.jugadores.length<this.maxJugadores);
-	}
-
 	this.comprobarFase=function(){
 		if (!this.hayHueco()){
 			this.fase="jugando";
 		}
 	}
-
+	this.hayHueco=function(){
+		return (this.jugadores.length<this.maxJugadores)
+	}
+	this.estoy=function(nick){
+		for(i=0;i<this.jugadores.length;i++){
+			if (this.jugadores[i].nick==nick){
+				return true
+			}
+		}
+		return false;
+	}
 	this.agregarJugador(this.owner);
 }
 

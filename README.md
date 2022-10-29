@@ -1,13 +1,15 @@
 # Proyecto 22
-Proyecto de la asignatura procesos en ingeniería software 22-23.
-Escuela Superior de Ingeniería Informática - Albacete (Universidad de Castilla La Mancha)
+Proyecto de Procesos de Ingeniería Software, curso 22-23.
+Escuela Superior de Ingeniería Informática de Albacete
 
 ## Descripción
-Este repositorio contiene la arquitectura base de una solución software estilo SaaS (Software as a Service) de una aplicación genérica que implementa la siguiente funcionalidad:
-
-- Los usuarios inician sesión con un nick (no hay clave). El nick es único.
-- Los usuarios pueden crear partida (sin nombre). Las partidas son de 2 usuarios. El sistema asigna un código a la partida
-- Los usuarios pueden unirse a partidas disponibles (las que tienen un sólo jugador)
+Solución software con aruitectura Software as a Service (SaaS), de una aplicación que permite:
+- Iniciar sesión, con un nick único
+- Los usuarios pueden crear una partida, que por defecto es de 2 usuarios. Las partidas tienen un nick único.
+- Los usuarios pueden unirse a las partidas disponibles.
+- Los usuarios pueden salir del sistema (cerrar sesión).
+- Los usuarios pueden abandonar la partida.
+- Tras estar llena la partida se puede iniciar.
 
 ## URL
 https://procesos-ij2yuy7u7a-ew.a.run.app

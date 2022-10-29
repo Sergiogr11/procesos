@@ -72,4 +72,11 @@ function ClienteRest(){
 			iu.mostrarListaDePartidasDisponibles(lista);
 		});
 	}
+	this.usuarioSale=function(){
+		let nick=this.nick;
+		$.getJSON("/salir/"+nick,function(){
+			$.removeCookie("nick");
+			iu.comprobarCookie();
+		})
+	}
 }
