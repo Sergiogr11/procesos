@@ -14,9 +14,15 @@ function ClienteWS(){
 	this.abandonarPartida=function(){
 		this.socket.emit("abandonarPartida",rest.nick,cws.codigo);
 	}
-//	this.colocarBarco=function(nombre,x,y)
-// 	this.barcosDesplegados=function()
-//  this.disparar=function(x,y)
+	this.colocarBarco=function(nombre,x,y){
+		this.socket.emit("colocarBarco", rest.nick, nombre, x , y);
+	}
+	this.barcosDesplegados=function(){
+		this.socket.emit("barcosDesplegados", rest.nick);
+	}
+    this.disparar=function(x,y){
+		this.socket.emit("disparar", rest.nick, x, y);
+	}
 
 	this.servidorWS=function(){
 		let cli=this;
@@ -50,6 +56,11 @@ function ClienteWS(){
 		});
 		this.socket.on("aJugar",function(){
 			iu.mostrarModal("A jugaaar!");
-		})
+		});
+		this.socket.on("disparo", function(res){
+			console.log(res.impacto)
+			console.log("Turno" + res.turno)
+		});
+		this.socket.on()
 	}
 }

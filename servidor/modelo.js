@@ -137,8 +137,18 @@ function Usuario(nick,juego){
 	this.meDisparan=function(x,y){
 		this.tableroPropio.meDisparan(x,y);
 	}
+	this.obtenerEstadoBarco=function(nombre){
+		let res=false;
+		if(this.flota[nombre]){
+			res=this.flota[nombre].estado;
+		}
+		return res;
+	}
 	this.obtenerEstado=function(x,y){
 		return this.tableroPropio.obtenerEstado(x,y);
+	}
+	this.obtenerEstadoMarcado=function(x,y){
+		return this.tableroRival.obtenerEstado(x,y);
 	}
 	this.marcarEstado=function(estado,x,y){
 		this.tableroRival.marcarEstado(estado,x,y);

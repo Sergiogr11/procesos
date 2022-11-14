@@ -30,11 +30,48 @@ function ServidorWS(){
 			  	let res = juego.jugadorSeUneAPartida(nick,codigo);		  	
 			  	cli.enviarAlRemitente(socket,"unidoAPartida",res);		  	
 			  	let partida=juego.obtenerPartida(codigo);
-			  	if (partida.esJugando()){
-			  		cli.enviarATodosEnPartida(io,codigoStr,"aJugar",{});
+			  	if (partida.esDesplegando()){
+			  		cli.enviarATodosEnPartida(io,codigoStr,"faseDesplegando",{});
 			  	}
+			});
+			socket.on("barcosDesplegados", function(nick){
+				let us = juego.obtenerUsuario(nick);
+				if(us){
+					us.barcosDesplegados();
+					let partida=us.partida;
+					if(partida.fase=="jugando"){
+						let res={fase:partida.turno, turno:partida.turno}
+						let codigoStr=partida.codigo.toString();
+						cli.enviarATodosEnPartida(io, codigoStr, "aJugar",{})
+					}
+				}
 
 			});
+			socket.on("disparar", function(nick, x, y){
+				let us = juego.obtenerUsuario(nick)
+				let partida=us.partida;
+				if(us && partida.esJugando() && partida.turno.nick==nick){
+					us.disparar(x,y);
+					let estado=us.obtenerEstadoMarcado(x,y);
+					let partida=us.partida;
+					let codigoStr=partida.codigo.toString();
+					let res={impacto:estado, x:x, y:y, turno:partida.turno.nick};
+					cli.enviarATodosEnPartida(io,codigoStr,"disparo", res);
+					if(partida.fase == "final"){
+						cli.enviarATodosEnPartida(io, codigoStr, "finPartida", res);
+					}
+				}
+			});
+			socket.on("colocarBarco", function(nick, nombre, x, y){
+				let us=juego.obtenerUsuario(nick);
+				if(us){
+					us.colocarBarco(nombre,x,y);
+					let desplegado=us.obtenerBarcoDesplegado(nombre);
+					let res = {barco:nombre, colocado:desplegado};
+					cli.enviarAlRemitente(socket, "barcoColocado");
+				}
+			});
+		
 		});
 	}
 }
