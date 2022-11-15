@@ -71,9 +71,12 @@ describe("El juego...", function() {
     });
 
     it("Comprobar que las flotas están desplegadas",function(){
+      expect(us1.obtenerBarcoDesplegado("b2")).toEqual(true); //Falla
+      expect(us2.obtenerBarcoDesplegado("b2")).toEqual(true); //Falla
       expect(us1.todosDesplegados()).toEqual(true);
       expect(us2.todosDesplegados()).toEqual(true);
       expect(partida.flotasDesplegadas()).toEqual(true);
+      expect(partida.esJugando()).toEqual(true);;
     });
 
     it("Comprobar jugada que Pepe gana",function(){

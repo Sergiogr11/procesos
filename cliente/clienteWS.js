@@ -12,16 +12,21 @@ function ClienteWS(){
 		this.socket.emit("unirseAPartida",rest.nick,codigo);
 	}
 	this.abandonarPartida=function(){
-		this.socket.emit("abandonarPartida",rest.nick,cws.codigo);
+		this.socket.emit("abandonarPartida",rest.nick,this.codigo); //cws.codigo
+	}
+	this.salir = function(){
+		this.socket.emit("usuarioSale", rest.nick);
 	}
 	this.colocarBarco=function(nombre,x,y){
-		this.socket.emit("colocarBarco", rest.nick, nombre, x , y);
+		this.socket.emit("colocarBarco", rest.nick, nombre, x,y);
 	}
+	
 	this.barcosDesplegados=function(){
 		this.socket.emit("barcosDesplegados", rest.nick);
 	}
-    this.disparar=function(x,y){
-		this.socket.emit("disparar", rest.nick, x, y);
+	
+	this.disparar=function(x,y){
+		this.socket.emit("disparar", rest.nick,x,y);
 	}
 
 	this.servidorWS=function(){
@@ -36,7 +41,8 @@ function ClienteWS(){
 			else{
 				console.log("No se ha podido crear partida");
 				iu.mostrarModal("No se ha podido crear partida");
-				iu.mostrarCrearPartida();
+				//iu.mostrarCrearPartida();
+				rest.comprobarUsuario();
 			}
 		});
 		this.socket.on("unidoAPartida",function(data){
@@ -54,13 +60,27 @@ function ClienteWS(){
 				iu.mostrarListaDePartidasDisponibles(lista);
 			}
 		});
+		this.socket.on("faseDesplegando",function(){
+			iu.mostrarModal("Ya puedes desplegar la flota!");
+		});
 		this.socket.on("aJugar",function(){
 			iu.mostrarModal("A jugaaar!");
 		});
-		this.socket.on("disparo", function(res){
-			console.log(res.impacto)
-			console.log("Turno" + res.turno)
+		this.socket.on("esperandoRival",function(){
+			iu.mostrarModal("Esperando rival");
 		});
-		this.socket.on()
+		this.socket.on("disparo",function(){
+			iu.mostrarModal(res.impacto);
+			iu.mostrarModal("Turno: " + res.turno);
+		});
+		this.socket.on("info",function(){
+			console.log(info);
+		});
+		this.socket.on("finPartida",function(res){
+			console.log("Fin de la partida");
+			console.log("Ganador: "+res.turno);
+			iu.mostrarModal("Fin de la partida. Ganador: " + res.turno);
+			iu.finPartida();
+		});
 	}
 }

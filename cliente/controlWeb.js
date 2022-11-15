@@ -2,8 +2,9 @@ function ControlWeb(){
 	this.comprobarCookie=function(){
 		if ($.cookie("nick")){
 			rest.nick=$.cookie("nick");
-			cws.conectar();
-			this.mostrarHome();
+			rest.comprobarUsuario();
+			//cws.conectar();
+			//this.mostrarHome();
 		}
 		else{
 			this.mostrarAgregarUsuario();
@@ -12,7 +13,7 @@ function ControlWeb(){
 	this.mostrarAgregarUsuario=function(){
 		let cadena= '<div class="row" id="mAU">';//'<form class="form-row needs-validation"  id="mAJ">';
 		cadena=cadena+"<div class='col'>";
-		cadena=cadena+'<div class="row"><div class="col"><h2>Batalla Naval</h2></div></div>';
+		cadena=cadena+'<div class="row"><div class="col"><h2>El juego indefinido</h2></div></div>';
 		cadena=cadena+'<div class="row">';
 		cadena=cadena+'<div class="col">'
         cadena=cadena+'<input type="text" class="form-control mb-2 mr-sm-2" id="usr" placeholder="Introduce tu nick (max 6 letras)" required></div>';
@@ -44,7 +45,7 @@ function ControlWeb(){
 		$('#mH').remove();
 		let cadena="<div class='row' id='mH'>";
 		cadena=cadena+'<div class="col">';
-		cadena=cadena+"<p>Bienvenido "+ rest.nick+"</p>";
+		cadena=cadena+"<p>Bienvenido "+rest.nick+"</p>";
 		cadena=cadena+'<button id="btnSalir" class="btn btn-primary mb-2 mr-sm-2">Salir</button>';
 		cadena=cadena+"<div id='codigo'></div>"
 		cadena=cadena+"</div></div>";
