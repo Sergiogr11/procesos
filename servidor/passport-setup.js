@@ -13,8 +13,8 @@ passport.deserializeUser(function(user, done) {
 });
 
 passport.use(new GoogleStrategy({
-    clientID:"455903968700-bo2cug7jke03u8qn66poe1453v4ip8sd.apps.googleusercontent.com ",
-    clientSecret:"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 ",
+    clientID:"455903968700-bo2cug7jke03u8qn66poe1453v4ip8sd.apps.googleusercontent.com",
+    clientSecret:"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",
     callbackURL:"http://localhost:3000/google/callback"
   },
   function(accessToken, refreshToken, profile, done) {
