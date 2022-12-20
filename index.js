@@ -1,6 +1,7 @@
 const fs = require('fs');
 const express = require('express');
 const app = express();
+const passport = require('passport')
 const http = require('http');
 const server = http.createServer(app);
 const { Server } = require("socket.io");
@@ -16,6 +17,39 @@ let servidorWS = new sWS.ServidorWS();
 
 
 app.use(express.static(__dirname + "/"));
+
+const cookieSession=require("cookie-session");
+require("./servidor/passport-setup.js")
+
+app.use(cookieSession({
+  name: 'Batalla naval',
+  keys: ['key1', 'key2']
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.get("/auth/google",passport.authenticate('google', { scope: ['profile','email'] }));
+
+app.get('/google/callback', 
+  passport.authenticate('google', { failureRedirect: '/fallo' }),
+  function(req, res) {
+    // Successful authentication, redirect home.
+    res.redirect('/good');
+});
+
+app.get("/good", function(request,response){
+  var nick=request.user.emails[0].value;
+  if (nick){
+    juego.agregarUsuario(nick);
+  }
+  response.cookie('nick',nick);
+  response.redirect('/');
+});
+
+app.get("/fallo",function(request,response){
+  response.send({nick:"nook"})
+})
+
 
 app.get("/", function(request,response){
 	let contenido=fs.readFileSync(__dirname+"/cliente/index.html");

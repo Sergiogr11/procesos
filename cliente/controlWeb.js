@@ -21,6 +21,7 @@ function ControlWeb() {
         cadena = cadena + '<div class="col">';
         cadena = cadena + '<button id="btnAU" class="btn btn-primary mb-2 mr-sm-2">Iniciar sesión</button>';
         cadena = cadena + '</div></div>'; //' </form>';
+        cadena=cadena+'<a href="/auth/google" class="btn btn-primary mb-2 mr-sm-2">Accede con Google</a>';
         cadena = cadena + '<div id="nota"></div></div></div>';
 
 
