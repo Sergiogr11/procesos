@@ -23,7 +23,7 @@ describe("El juego", function () {
   });
 
   it("Crear juego y se une uno, el juego tiene 2 jugadores y cambia a fase desplegando", function () {
-    const partidaId = usr1.crearPartida();
+    const partidaId = usr1.jugadorCreaPartida();
     const partida = juego.partidas[partidaId];
     expect(partida.esInicial()).toEqual(true);
     usr2.unirseAPartida(partidaId);
