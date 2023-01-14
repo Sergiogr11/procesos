@@ -146,8 +146,15 @@ function ClienteWS() {
         });
 
         this.socket.on("finalPartida", function (res) {
-            iu.mostrarModal('Finall, ' + res + ' ha ganado la partida!!');
-            iu.finalPartida();
+            if (res == rest.nick){
+                console.log('Victoria!!, ' + res + ' has ganado la partida!!');
+                iu.mostrarModal('Finall, ' + res + ' ha ganado la partida!!');
+                iu.finalPartida();
+            }else{
+                iu.mostrarModal('Derrota :( , ' + res + ' ha ganado la partida');
+                iu.finalPartida();
+            }
+            
         });
     }
 }

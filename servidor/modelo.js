@@ -235,7 +235,7 @@ function Partida(codigo, usr) {
 	this.codigo = codigo;
 	this.owner = usr;
 	this.jugadores = [];
-	this.fase = "inicial";
+	this.fase = new Inicial();
 	this.maxJugadores = 2;
 	this.agregarJugador = function (usr) {
 		let res = this.codigo;
@@ -255,7 +255,7 @@ function Partida(codigo, usr) {
 	}
 	this.comprobarFase = function () {
 		if (!this.hayHueco()) {
-			this.fase = "desplegando";
+			this.fase = new Desplegando();
 		}
 	}
 	this.hayHueco = function () {
@@ -288,7 +288,7 @@ function Partida(codigo, usr) {
 	}
 	this.barcosDesplegados = function () {
 		if (this.flotasDesplegadas()) {
-			this.fase = "jugando";
+			this.fase = new Jugando();
 			this.asignarTurnoInicial();
 		}
 	}
@@ -338,7 +338,7 @@ function Partida(codigo, usr) {
 	}
 	this.comprobarFin = function (jugador) {
 		if (jugador.flotaHundida()) {
-			this.fase = "final";
+			this.fase = new Final();
 			console.log("Fin de la partida");
 			console.log("Ganador: " + this.turno.nick);
 			jugador.logFinalizarPartida(jugador.nick,this.turno.nick,this.codigo);
@@ -471,6 +471,24 @@ function Agua() {
 function Inicial() {  
 	this.nombre = "inicial"
 }
+
+
+function Desplegando() {  
+	this.nombre = "desplegando"
+}
+
+
+
+function Jugando() {  
+	this.nombre = "jugando"
+}
+
+
+
+function Final() {  
+	this.nombre = "final"
+}
+
 
 
 
