@@ -75,6 +75,7 @@ function ClienteWS() {
             if (data.codigo != -1) {
                 console.log(data.nombreA + " ha abandonado la partida con codigo: " + data.codigoP + "\n" + " Ha ganado " + data.nombreG)
                 iu.mostrarHome();
+
                 iu.mostrarModal(data.nombreA + " ha abandonado la partida con codigo: " + data.codigoP + "\n" + " Ha ganado " + data.nombreG);
             }
             else {
@@ -145,12 +146,8 @@ function ClienteWS() {
         });
 
         this.socket.on("finalPartida", function (res) {
-            iu.mostrarModal('Victoriaa! ' + res + ' ha ganado la partida!!');
+            iu.mostrarModal('Finall, ' + res + ' ha ganado la partida!!');
             iu.finalPartida();
         });
-
-
     }
-
-
 }

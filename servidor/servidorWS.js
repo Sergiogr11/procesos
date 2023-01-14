@@ -118,6 +118,7 @@ function ServidorWS() {
                         let codigoStr = partida.codigo.toString();
                         if (partida.esFinal()) {
                             cli.enviarATodosEnPartida(io, partida.codigo.toString(), "finalPartida", jugador.nick);
+
                         }
                         
                         let res2 = { atacante: jugador.nick, impacto: impacto, x: x, y: y, turno: turno.nick }

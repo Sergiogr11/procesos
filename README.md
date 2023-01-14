@@ -12,5 +12,5 @@ Solución software con arquitectura Software as a Service (SaaS), de una aplicac
 - Tras estar llena la partida se puede iniciar.
 
 ## URL
-https://procesos-ij2yuy7u7a-ew.a.run.app
+https://procesos2-ij2yuy7u7a-ew.a.run.app
 
