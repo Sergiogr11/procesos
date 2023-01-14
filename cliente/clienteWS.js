@@ -112,7 +112,6 @@ function ClienteWS() {
             if (data.colocado.desplegado) {
                 let barco = tablero.flota[data.barco];
                 tablero.puedesColocarBarco(barco, data.x, data.y);
-                iu.mostrarModal("Barco: " + data.barco + " colocado");
                 cli.barcosDesplegados();
             }
             else {
