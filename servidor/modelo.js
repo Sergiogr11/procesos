@@ -87,7 +87,7 @@ function Juego(test) {
 	this.obtenerPartidasDisponibles = function () {
 		let lista = [];
 		for (let key in this.partidas) {
-			if (this.partidas[key].fase == "inicial") {
+			if (this.partidas[key].fase.nombre == "inicial") {
 				lista.push({ "codigo": key, "owner": this.partidas[key].owner.nick,"fase":this.partidas[key].fase });
 			}
 		}
@@ -96,8 +96,8 @@ function Juego(test) {
 	this.finalizarPartida = function (nick) {
 		console.log("Entro a finalizar la partida")
 		for (let key in this.partidas) {
-			if ((this.partidas[key].fase == "inicial" || this.partidas[key].fase == "desplegando") && this.partidas[key].estoy(nick)) {
-				this.partidas[key].fase = "final";
+			if ((this.partidas[key].fase.nombre == "inicial" || this.partidas[key].fase.nombre == "desplegando") && this.partidas[key].estoy(nick)) {
+				this.partidas[key].fase.nombre = "final";
 				return this.partidas[key].codigo;
 				
 			}
@@ -147,7 +147,7 @@ function Usuario(nick, juego) {
 		this.flota["Carguero grande H(3)"] = new Barco("Carguero grande (3)", 3);
 	}
 	this.colocarBarco = function (nombre, x, y) {
-		if (this.partida.fase == "desplegando") {
+		if (this.partida.fase.nombre == "desplegando") {
 			let barco = this.flota[nombre];
 			this.tableroPropio.colocarBarco(barco, x, y);
 			console.log("El usuario",this.nick,"coloca el barco",barco.nombre,"en la posicion",x,y)
@@ -269,13 +269,13 @@ function Partida(codigo, usr) {
 		return false;
 	}
 	this.esJugando = function () {
-		return this.fase == "jugando";
+		return this.fase.nombre == "jugando";
 	}
 	this.esDesplegando = function () {
-		return this.fase == "desplegando";
+		return this.fase.nombre == "desplegando";
 	}
 	this.esFinal = function () {
-		return this.fase == "final";
+		return this.fase.nombre == "final";
 	}
 	this.flotasDesplegadas = function () {
 		for (i = 0; i < this.jugadores.length; i++) {
@@ -347,7 +347,7 @@ function Partida(codigo, usr) {
 		if (jugador) {
 
 			rival = this.obtenerRival(jugador.nick)
-			this.fase = "final";
+			this.fase = new Final();
 			console.log("Fin de la partida");
 			console.log("Ha abandonado el jugador " + jugador.nick);
 			if(rival){
