@@ -143,9 +143,12 @@ function Usuario(nick, juego) {
 		this.tableroRival = new Tablero(dim);
 	}
 	this.inicializarFlota = function () {
-		this.flota["Barco Pequeño (1)"] = new Barco("Barco Pequeño (1)", 1, "vertical");
-		this.flota["Carguero grande H (3)"] = new Barco("Carguero grande H (3)", 3, "horizontal");
-		this.flota["Carguero grande V (3)"] = new Barco("Carguero grande V (3)", 3, "vertical");
+		this.flota["Fragata(1)"] = new Barco("Fragata(1)", 1, "horizontal");
+		this.flota["Destructor Vertical(2)"] = new Barco("Destructor Vertical(2)", 2, "vertical");
+		this.flota["Destructor Horizontal(2)"] = new Barco("Destructor Horizontal(2)", 2, "horizontal");
+		this.flota["Submarino Horizontal(3)"] = new Barco("Submarino Horizontal(3)", 3, "horizontal");
+		this.flota["Submarino Vertical(3)"] = new Barco("Submarino Vertical(3)", 3, "vertical");
+		this.flota["Acorazado Horizontal(4)"] = new Barco("Acorazado Horizontal(4)", 4, "horizontal");
 	}
 	this.colocarBarco = function (nombre, x, y) {
 		if (this.partida.fase.nombre == "desplegando") {
