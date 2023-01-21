@@ -13,16 +13,17 @@ function ControlWeb() {
     }
 
     this.mostrarAgregarUsuario = function () {
-        var cadena = '<div class="row" id="mAU">';//'<form class="form-row needs-validation"  id="mAU">';
-        cadena = cadena + '<div class="col"><h2>Juego Batalla naval</h2></div>';
+        var cadena = '<div class="row" id="mAU">';
+        cadena = cadena + '<div class="col"><h2>Hundir la Flota</h2></div>';
         cadena = cadena + '<div class="row">';
         cadena = cadena + '<div class="col">'
         cadena = cadena + '<input type="text" class="form-control mb-2 mr-sm-2" id="usr" placeholder="Introduce tu nickname (max 6 letras)" required></div>';
         cadena = cadena + '<div class="col">';
         cadena = cadena + '<button id="btnAU" class="btn btn-primary mb-2 mr-sm-2">Iniciar sesión</button>';
-        cadena = cadena + '</div></div>'; //' </form>';
-        cadena=cadena+'<a href="/auth/google" class="btn btn-primary mb-2 mr-sm-2">Accede con Google</a>';
+        cadena = cadena + '</div></div>'; 
+        cadena = cadena +'<a href="/auth/google" class="btn btn-primary mb-2 mr-sm-2">Accede con Google</a>';
         cadena = cadena + '<div id="nota"></div></div></div>';
+        cadena = cadena + '<div id="fondo"><img src="../cliente/img/fondo.png"/></div>'
 
 
         $("#agregarUsuario").append(cadena); 
@@ -49,9 +50,10 @@ function ControlWeb() {
 
         $("#mH").remove();
         $('#gc').remove();
+        $('#fondo').remove();
 
         let cadena = '<div class="row" id="mH">';
-        cadena = cadena + '<div class="col" ><h2>Batalla Naval</h2></div>';
+        cadena = cadena + '<div class="col" ><h2>Hundir la Flota</h2></div>';
         cadena = cadena + "<div><h3> Bienvenido " + rest.nick + "     "+"</h3></div>"
         cadena = cadena + '<div style="margin-bottom:15px" id="codigo"></div>'
         cadena = cadena + '<button id="btnS" class="btn btn-primary mb-2 mr-sm-2">Salir</button>';
