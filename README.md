@@ -10,6 +10,12 @@ Solución software con arquitectura Software as a Service (SaaS), de una aplicac
 - Los usuarios pueden salir del sistema (cerrar sesión).
 - Los usuarios pueden abandonar la partida.
 - Tras estar llena la partida se puede iniciar.
+- El juego consistirá en el juego de hundir la flota
+- Los usuarios pueden colocar barcos
+- Los usuarios pueden disparar
+- Los usuarios pueden ganar la partida al disparar a todos los barcos
+- Hay 6 barcos, 2 que ocupan 2 casillas, 2 que ocupan 3 casillas, 1 que ocupa 1 casilla y 1 que ocupa 4 casillas
+- Los barcos pueden ser verticales y horizontales
 
 ## URL
 https://procesos2-ij2yuy7u7a-ew.a.run.app
