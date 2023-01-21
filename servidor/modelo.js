@@ -382,8 +382,8 @@ function Tablero(size) {
 	this.colocarBarco = function (barco, x, y) {
 		if(barco.orientacion == "horizontal"){
 			if (this.comprobarLimites(barco.tam, x)) {
-				if (this.casillasLibres(x, y, barco.tam)) {
-					for (i = x; i < barco.tam + x; i++) {
+				if (this.casillasLibres(x, y, barco)) {
+					for (var i = x; i < barco.tam + x; i++) {
 						this.casillas[i][y].contiene = barco;
 						console.log('Barco', barco.nombre, 'colocado en', i, y)
 					}
@@ -392,7 +392,7 @@ function Tablero(size) {
 			}
 		}else{
 			if (this.comprobarLimites(barco.tam, y)) {
-				if (this.casillasLibres(x, y, barco.tam)) {
+				if (this.casillasLibres(x, y, barco)) {
 					for (i = x; i < barco.tam + y; i++) {
 						this.casillas[x][i].contiene = barco;
 						console.log('Barco', barco.nombre, 'colocado en', x, i)
@@ -411,13 +411,23 @@ function Tablero(size) {
 		} else { return true }
 	}
 
-	this.casillasLibres = function (x, y, tam) {
-		for (i = x; i < tam; i++) {
-			let contiene = this.casillas[i][y].contiene;
-			if (!contiene.esAgua()) {
-				return false;
+	this.casillasLibres = function (x, y, barco) {
+		if(barco.orientacion == "horizontal"){
+			for (i = x; i < barco.tam + x; i++) {
+				let contiene = this.casillas[i][y].contiene;
+				if (!contiene.esAgua()) {
+					return false;
+				}
+			}
+		}else{
+			for (i = y; i < barco.tam + y; i++) {
+				let contiene = this.casillas[x][i].contiene;
+				if (!contiene.esAgua()) {
+					return false;
+				}
 			}
 		}
+		
 		return true;
 	}
 	this.meDisparan = function (x, y) {

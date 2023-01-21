@@ -13,20 +13,43 @@ function ControlWeb() {
     }
 
     this.mostrarAgregarUsuario = function () {
-        var cadena = '<div class="row" id="mAU">';
-        cadena = cadena + '<div class="col"><h2>Hundir la Flota</h2></div>';
-        cadena = cadena + '<div class="row">';
-        cadena = cadena + '<div class="col">'
-        cadena = cadena + '<input type="text" class="form-control mb-2 mr-sm-2" id="usr" placeholder="Introduce tu nickname (max 6 letras)" required></div>';
-        cadena = cadena + '<div class="col">';
-        cadena = cadena + '<button id="btnAU" class="btn btn-primary mb-2 mr-sm-2">Iniciar sesión</button>';
-        cadena = cadena + '</div></div>'; 
-        cadena = cadena +'<a href="/auth/google" class="btn btn-primary mb-2 mr-sm-2">Accede con Google</a>';
-        cadena = cadena + '<div id="nota"></div></div></div>';
-        cadena = cadena + '<div id="fondo"><img src="../cliente/img/fondo.png"/></div>'
+        var cadena = `
+        <div id="mAU">
+        
+        <div class="row">
+            <div class="col">
+                <h1>Hundir la Flota</h1>
+            </div>
+            <div id="fondo">
+         <img src="../cliente/img/fondo.png"/>
+        </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <input type="text" class="form-control mb-2 mr-sm-2" id="usr" placeholder="Introduce tu nickname (max 6 letras)" required>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <button id="btnAU" class="btn btn-primary mb-2 mr-sm-2">Iniciar sesión</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+            <a href="/auth/google" class="btn btn-primary mb-2 mr-sm-2">Accede con Google</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div id="nota"></div>
+            </div>
+        </div>
+    </div>
+    
+`
 
 
-        $("#agregarUsuario").append(cadena); 
+        $("#agregarUsuario").append(cadena);
 
         $("#btnAU").on("click", function (e) {
             if ($('#usr').val() === '' || $('#usr').val().length > 6) {
@@ -53,8 +76,8 @@ function ControlWeb() {
         $('#fondo').remove();
 
         let cadena = '<div class="row" id="mH">';
-        cadena = cadena + '<div class="col" ><h2>Hundir la Flota</h2></div>';
-        cadena = cadena + "<div><h3> Bienvenido " + rest.nick + "     "+"</h3></div>"
+        cadena = cadena + '<div class="col" ><h1>Hundir la Flota</h1></div>';
+        cadena = cadena + "<div><h3> Bienvenido " + rest.nick + "     " + "</h3></div>"
         cadena = cadena + '<div style="margin-bottom:15px" id="codigo"></div>'
         cadena = cadena + '<button id="btnS" class="btn btn-primary mb-2 mr-sm-2">Salir</button>';
         cadena = cadena + '</div>'
@@ -62,22 +85,22 @@ function ControlWeb() {
 
         $('#agregarUsuario').append(cadena);
         this.mostrarCrearPartida();
-		rest.obtenerListaPartidasDisponibles();
+        rest.obtenerListaPartidasDisponibles();
 
         $("#btnS").on("click", function (e) {
             $("#mCP").remove();
-			$('#mLP').remove();
-			$('#mH').remove();
+            $('#mLP').remove();
+            $('#mH').remove();
             $('#gc').remove();
-			rest.usuarioSale();
-            
-           
-            
-        
+            rest.usuarioSale();
+
+
+
+
 
         })
 
-        
+
 
 
     }
@@ -103,14 +126,14 @@ function ControlWeb() {
 
 
 
-        
+
 
 
 
 
     }
-    
-    this.mostrarAbandonarPartida = function(){
+
+    this.mostrarAbandonarPartida = function () {
 
         $('#mAbP').remove();
 
@@ -121,7 +144,7 @@ function ControlWeb() {
         cadena = cadena + '</div>'
 
         $('#codigo').append(cadena);
-        
+
         $("#btnAbP").on("click", function (e) {
 
             cws.abandonarPartida();
@@ -135,7 +158,7 @@ function ControlWeb() {
         iu.mostrarAbandonarPartida();
     }
 
-    
+
 
     this.mostrarListaDePartidas = function (lista) {
         $('#mLP').remove();
@@ -180,15 +203,15 @@ function ControlWeb() {
         });
     }
 
-    this.finalPartida = function(){
-		$('#mH').remove()
+    this.finalPartida = function () {
+        $('#mH').remove()
         cws.codigo = undefined;
-		$('#gc').remove();
-		tablero = new Tablero(10);
-		this.mostrarHome()
-	}
+        $('#gc').remove();
+        tablero = new Tablero(10);
+        this.mostrarHome()
+    }
 
-    
+
 
     this.mostrarModal = function (msg) {
         $('#mM').remove();
