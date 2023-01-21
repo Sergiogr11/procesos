@@ -39,6 +39,7 @@ function ControlWeb() {
             <a href="/auth/google" class="btn btn-primary mb-2 mr-sm-2">Accede con Google</a>
             </div>
         </div>
+        
         <div class="row">
             <div class="col">
                 <div id="nota"></div>
@@ -75,12 +76,19 @@ function ControlWeb() {
         $('#gc').remove();
         $('#fondo').remove();
 
-        let cadena = '<div class="row" id="mH">';
-        cadena = cadena + '<div class="col" ><h1>Hundir la Flota</h1></div>';
-        cadena = cadena + "<div><h3> Bienvenido " + rest.nick + "     " + "</h3></div>"
-        cadena = cadena + '<div style="margin-bottom:15px" id="codigo"></div>'
-        cadena = cadena + '<button id="btnS" class="btn btn-primary mb-2 mr-sm-2">Salir</button>';
-        cadena = cadena + '</div>'
+        let cadena = `
+    <div class="row" id="mH">
+            <div class="col">
+             <h1>Hundir la Flota</h1>
+        </div>
+        <div>
+            <h2>Bienvenido ${rest.nick}</h2>
+        </div>
+        <div style="margin-bottom:15px" id="codigo"></div>
+        <button id="btnS" class="btn btn-primary mb-2 mr-sm-2">Salir</button>
+    </div>
+
+        `
 
 
         $('#agregarUsuario').append(cadena);
@@ -93,11 +101,6 @@ function ControlWeb() {
             $('#mH').remove();
             $('#gc').remove();
             rest.usuarioSale();
-
-
-
-
-
         })
 
 
@@ -110,11 +113,13 @@ function ControlWeb() {
 
         $('#mCP').remove();
 
-        let cadena = '<div class="row" id="mCP">';
-        cadena = cadena + '<div class="col">'
-        cadena = cadena + '<button id="btnCP" class="btn btn-primary mb-2 mr-sm-2">Crear Partida</button>';
-        cadena = cadena + '</div>'
-        cadena = cadena + '</div>'
+        let cadena = `
+        <div class="row" id="mCP">
+            <div class="col">
+                <button id="btnCP" class="btn btn-primary mb-2 mr-sm-2">Crear Partida</button>
+            </div>
+        </div>
+        `
 
         $('#crearPartida').append(cadena);
 
@@ -137,11 +142,13 @@ function ControlWeb() {
 
         $('#mAbP').remove();
 
-        let cadena = '<div class="row" id="mAbP">';
-        cadena = cadena + '<div style="margin-top:15px" class="col">'
-        cadena = cadena + '<button id="btnAbP" class="btn btn-primary mb-2 mr-sm-2">Abandonar Partida</button>';
-        cadena = cadena + '</div>'
-        cadena = cadena + '</div>'
+        let cadena = `
+        <div class="row" id="mAbP">
+         <div style="margin-top:15px" class="col">
+            <button id="btnAbP" class="btn btn-primary mb-2 mr-sm-2">Abandonar Partida</button>
+         </div>
+        </div>
+        `
 
         $('#codigo').append(cadena);
 

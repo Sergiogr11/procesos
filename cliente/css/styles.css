@@ -481,3 +481,104 @@ a.btn:hover {
     object-fit: cover;
 }
 
+#mH {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-top: 20px;
+}
+
+#mH h1 {
+    font-size: 36px;
+    font-weight: bold;
+    color: #336699;
+}
+
+#mH h2 {
+    font-size: 24px;
+    color: #336699;
+}
+
+#codigo {
+    border: 2px solid #336699;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+#btnS {
+    background-color: #00bfff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    margin-top: 20px;
+    width: 100%;
+    font-size: 1.2em;
+	margin: auto;
+}
+
+
+#btnS:hover{
+	background-color: #336699;
+    color: #fff;
+    cursor: pointer;
+}
+
+#mCP {
+    display: flex;
+    justify-content: center;
+	flex-direction: column;
+	text-align: center;
+	margin-top: 20px;
+    align-items: center;
+    height: 80px;
+}
+
+#btnCP {
+    background-color: #00bfff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    margin-top: 20px;
+    width: 100%;
+    font-size: 1.2em;
+	margin: auto;
+}
+
+#btnCP:hover {
+    background-color: #336699;
+    color: #fff;
+    cursor: pointer;
+}
+#mAbP {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80px;
+}
+#btnAbP {
+	background-color: #00bfff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    margin-top: 20px;
+    width: 100%;
+    font-size: 1.2em;
+	margin: auto;
+}
+
+#btnAbP:hover {
+    background-color: #336699;
+    color: #fff;
+    cursor: pointer;
+}
+
+#mLP {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80px;
+}
