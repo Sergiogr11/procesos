@@ -80,11 +80,11 @@ function ServidorWS() {
                     }
                 }
             });
-            socket.on("colocarBarco", function (nick, nombre, x, y) {
+            socket.on("colocarBarco", function (nick, nombre, x, y,) {
                 let jugador = juego.obtenerUsuario(nick);
                 if (jugador) {
                     let desplegado=jugador.colocarBarco(nombre, x, y)
-                    let res = { barco: nombre, x: x, y: y, colocado: desplegado }
+                    let res = { barco: nombre, x: x, y: y, colocado: desplegado,}
                     cli.enviarAlRemitente(socket, "barcoColocado", res);
                 }
             });

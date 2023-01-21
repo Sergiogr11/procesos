@@ -143,8 +143,9 @@ function Usuario(nick, juego) {
 		this.tableroRival = new Tablero(dim);
 	}
 	this.inicializarFlota = function () {
-		this.flota["Barco Pequeño (1)"] = new Barco("Barco Pequeño (1)", 1);
-		this.flota["Carguero grande H(3)"] = new Barco("Carguero grande (3)", 3);
+		this.flota["Barco Pequeño (1)"] = new Barco("Barco Pequeño (1)", 1, "vertical");
+		this.flota["Carguero grande H (3)"] = new Barco("Carguero grande H (3)", 3, "horizontal");
+		this.flota["Carguero grande V (3)"] = new Barco("Carguero grande V (3)", 3, "vertical");
 	}
 	this.colocarBarco = function (nombre, x, y) {
 		if (this.partida.fase.nombre == "desplegando") {
@@ -376,15 +377,28 @@ function Tablero(size) {
 	}
 
 	this.colocarBarco = function (barco, x, y) {
-		if (this.comprobarLimites(barco.tam, x)) {
-			if (this.casillasLibres(x, y, barco.tam)) {
-				for (i = x; i < barco.tam + x; i++) {
-					this.casillas[i][y].contiene = barco;
-					console.log('Barco', barco.nombre, 'colocado en', i, y)
+		if(barco.orientacion == "horizontal"){
+			if (this.comprobarLimites(barco.tam, x)) {
+				if (this.casillasLibres(x, y, barco.tam)) {
+					for (i = x; i < barco.tam + x; i++) {
+						this.casillas[i][y].contiene = barco;
+						console.log('Barco', barco.nombre, 'colocado en', i, y)
+					}
+					barco.desplegado = true;
 				}
-				barco.desplegado = true;
+			}
+		}else{
+			if (this.comprobarLimites(barco.tam, y)) {
+				if (this.casillasLibres(x, y, barco.tam)) {
+					for (i = x; i < barco.tam + y; i++) {
+						this.casillas[x][i].contiene = barco;
+						console.log('Barco', barco.nombre, 'colocado en', x, i)
+					}
+					barco.desplegado = true;
+				}
 			}
 		}
+			
 	}
 
 	this.comprobarLimites = function (tam, x) {
@@ -424,10 +438,10 @@ function Casilla(x, y) {
 	this.contiene = new Agua();
 }
 
-function Barco(nombre, tam) { 
+function Barco(nombre, tam, orientacion) { 
 	this.nombre = nombre;
 	this.tam = tam;
-	this.orientacion;
+	this.orientacion = orientacion;
 	this.desplegado = false;
 	this.estado = "intacto";
 	this.disparos = 0;
@@ -475,8 +489,6 @@ function Inicial() {
 function Desplegando() {  
 	this.nombre = "desplegando"
 }
-
-
 
 function Jugando() {  
 	this.nombre = "jugando"

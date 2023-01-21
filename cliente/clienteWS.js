@@ -111,7 +111,7 @@ function ClienteWS() {
             console.log(data.colocado.desplegado)
             if (data.colocado.desplegado) {
                 let barco = tablero.flota[data.barco];
-                tablero.puedesColocarBarco(barco, data.x, data.y);
+                tablero.puedesColocarBarco(barco, data.x, data.y, barco.orientacion);
                 cli.barcosDesplegados();
             }
             else {
