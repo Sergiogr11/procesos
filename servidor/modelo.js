@@ -54,6 +54,13 @@ function Juego(test) {
 	this.obtenerUsuario = function (nick) {
 		return this.usuarios[nick];
 	}
+	this.obtenerUsuarios = function () {
+		let lista = [];
+		for (let key in this.usuarios) {
+			lista.push({ "nick": this.usuarios[key].nick, "user": key });
+		}
+		return lista;
+	}
 	this.crearPartida = function (usr) {
 		let codigo = Date.now();
 		console.log("Usuario " + usr.nick + " crea partida " + codigo);
@@ -143,12 +150,12 @@ function Usuario(nick, juego) {
 		this.tableroRival = new Tablero(dim);
 	}
 	this.inicializarFlota = function () {
-		this.flota["Fragata(1)"] = new Barco("Fragata(1)", 1, "horizontal");
-		this.flota["Destructor Vertical(2)"] = new Barco("Destructor Vertical(2)", 2, "vertical");
-		this.flota["Destructor Horizontal(2)"] = new Barco("Destructor Horizontal(2)", 2, "horizontal");
-		this.flota["Submarino Horizontal(3)"] = new Barco("Submarino Horizontal(3)", 3, "horizontal");
-		this.flota["Submarino Vertical(3)"] = new Barco("Submarino Vertical(3)", 3, "vertical");
-		this.flota["Acorazado Horizontal(4)"] = new Barco("Acorazado Horizontal(4)", 4, "horizontal");
+		this.flota["La Niña (1)"] = new Barco("La Niña (1)", 1, "horizontal");
+		this.flota["La Pinta Vertical (2)"] = new Barco("La Pinta Vertical (2)", 2, "vertical");
+		this.flota["La Pinta Horizontal (2)"] = new Barco("La Pinta Horizontal (2)", 2, "horizontal");
+		this.flota["La Santamaria Horizontal (3)"] = new Barco("La Santamaria Horizontal (3)", 3, "horizontal");
+		this.flota["La Santamaria Vertical (3)"] = new Barco("La Santamaria Vertical (3)", 3, "vertical");
+		this.flota["Titanic (4)"] = new Barco("Titanic (4)", 4, "horizontal");
 	}
 	this.colocarBarco = function (nombre, x, y) {
 		if (this.partida.fase.nombre == "desplegando") {
@@ -231,7 +238,6 @@ function Usuario(nick, juego) {
 
 	}
 
-
 }
 
 function Partida(codigo, usr) {
@@ -274,6 +280,9 @@ function Partida(codigo, usr) {
 	}
 	this.esJugando = function () {
 		return this.fase.nombre == "jugando";
+	}
+	this.esInicial = function () {
+		return this.fase.nombre == "inicial";
 	}
 	this.esDesplegando = function () {
 		return this.fase.nombre == "desplegando";
@@ -476,6 +485,20 @@ function Barco(nombre, tam, orientacion) {
 	}
 	this.obtenerEstado = function () {
 		return this.estado;
+	}
+	this.esVertical = function(){
+		if(this.orientacion == "vertical"){
+			return true;
+		}else{
+			return false;
+		}
+	}
+	this.esHorizontal = function(){
+		if(this.orientacion == "horizontal"){
+			return true;
+		}else{
+			return false;
+		}
 	}
 }
 
