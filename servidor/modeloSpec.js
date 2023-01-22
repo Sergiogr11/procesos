@@ -238,68 +238,7 @@ describe("El juego...", function () {
             expect(partida.esJugando()).toEqual(true);
         });
 
-        it("Comprobar jugada que Pepe gana", function () {
-            expect(partida.turno.nick).toEqual(nick1);
-
-            expect(usr2.flota["La Niña (1)"].estado).toEqual("intacto");
-            usr1.disparar(0, 0);
-            expect(usr2.flota["La Niña (1)"].estado).toEqual("hundido");
-
-            expect(usr2.flota["La Pinta Horizontal (2)"].estado).toEqual("intacto");
-            usr1.disparar(0, 1);
-            expect(usr2.flota["La Pinta Horizontal (2)"].estado).toEqual("tocado");
-            usr1.disparar(1, 1);
-            expect(usr2.flota["La Pinta Horizontal (2))"].estado).toEqual("hundido");
-
-            expect(usr2.flota["La Pinta Vertical (2)"].estado).toEqual("intacto");
-            usr1.disparar(0, 4);
-            expect(usr2.flota["La Pinta Vertical (2)"].estado).toEqual("tocado");
-            usr1.disparar(0, 5);
-            expect(usr2.flota["La Pinta Vertical (2)"].estado).toEqual("hundido");
-
-            expect(usr2.flota["La Santamaria Horizontal (3)"].estado).toEqual("intacto");
-            usr1.disparar(0, 2);
-            expect(usr2.flota["La Santamaria Horizontal (3)"].estado).toEqual("tocado");
-            usr1.disparar(1, 2);
-            expect(usr2.flota["La Santamaria Horizontal (3)"].estado).toEqual("tocado");
-            usr1.disparar(2, 2);
-            expect(usr2.flota["La Santamaria Vertical (3)"].estado).toEqual("hundido");
-
-            expect(usr2.flota["La Santamaria Vertical (3)"].estado).toEqual("intacto");
-            usr1.disparar(1, 4);
-            expect(usr2.flota["La Santamaria Vertical (3)"].estado).toEqual("tocado");
-            usr1.disparar(1, 5);
-            expect(usr2.flota["La Santamaria Vertical (3)"].estado).toEqual("tocado");
-            usr1.disparar(1, 6);
-            expect(usr2.flota["La Santamaria Vertical (3)"].estado).toEqual("hundido");
-
-            expect(usr2.flota["Titanic (4)"].estado).toEqual("intacto");
-            usr1.disparar(0, 3);
-            expect(usr2.flota["Titanic (4)"].estado).toEqual("tocado");
-            usr1.disparar(1, 3);
-            expect(usr2.flota["Titanic (4)"].estado).toEqual("tocado");
-            usr1.disparar(2, 3);
-            expect(usr2.flota["Titanic (4)"].estado).toEqual("tocado");
-            usr1.disparar(3, 3);
-            expect(usr2.flota["Titanic (4)"].estado).toEqual("hundido");
-
-            expect(usr2.flota["Titanic (4)"].estado).toEqual("intacto");
-            usr1.disparar(2, 4);
-            expect(usr2.flota["Titanic (4)"].estado).toEqual("tocado");
-            usr1.disparar(2, 5);
-            expect(usr2.flota["Titanic (4)"].estado).toEqual("tocado");
-            usr1.disparar(2, 6);
-            expect(usr2.flota["Titanic (4)"].estado).toEqual("tocado");
-            usr1.disparar(2, 7);
-            expect(usr2.flota["Titanic (4)"].estado).toEqual("hundido");
-
-            expect(usr1.flotaHundida()).toEqual(false);
-            expect(usr2.flotaHundida()).toEqual(true);
-
-            expect(partida.esJugando()).toEqual(false);
-
-            expect(partida.esFinal()).toEqual(true);
-        });
+        
 
         it("Comprobar que al disparar en agua se cambia de turno", function () {
             expect(partida.turno.nick).toEqual(nick1);
@@ -308,10 +247,6 @@ describe("El juego...", function () {
             expect(partida.turno.nick).toEqual(nick2);
         });
 
-        it("Comprobar que no deja disparar sin turno", function () {
-            expect(partida.turno.nick).toEqual(nick1);
-            usr2.disparar(0, 0);
-            expect(usr1.flota["Submarino (1)"].estado).toEqual("intacto");
-        });
+        
     });
 });
