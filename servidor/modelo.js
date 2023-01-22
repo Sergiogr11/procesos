@@ -402,7 +402,7 @@ function Tablero(size) {
 		}else{
 			if (this.comprobarLimites(barco.tam, y)) {
 				if (this.casillasLibres(x, y, barco)) {
-					for (i = x; i < barco.tam + y; i++) {
+					for (i = y; i < barco.tam + y; i++) {
 						this.casillas[x][i].contiene = barco;
 						console.log('Barco', barco.nombre, 'colocado en', x, i)
 					}
